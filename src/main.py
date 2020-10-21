@@ -1,5 +1,5 @@
 import json, random
-import pprint
+import pprint, os
 
 
 class Product:
@@ -64,36 +64,77 @@ def main():
     coins = [100.00, 50.00, 20.00, 10.00, 5.00, 2.00, 1.00, 0.50, 0.25, 0.10, 0.05, 0.01]
     coins = [i * 100 for i in coins]
     my_products = {}
+    total_price = 0.0
     
+    os.system('cls' if os.name == 'nt' else 'clear')
     loop_condition = True
     while loop_condition:
         menu()
         option = input('Enter the option: ')
         if option == '1':
-            pp = pprint.PrettyPrinter(indent=8)
-            pp.pprint(products)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('---------------------------------------------------------------------------------------- PRODUCTS ----------------------------------------------------------------------------------------')
+            print('\n')
+            print('The order is: CODE - [NAME, PRICE, DESCRIPTION]')
+            print('------------------------------------------------')
+            for key, value in products.items():
+                print(str(key) + ' - ' + str(value))
+            print('\n\n\n\n')
         elif option == '2':
-            pp = pprint.PrettyPrinter(indent=8)
-            pp.pprint(my_products)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('---------------------------------------------------------------------------------------- YOUR PRODUCTS ----------------------------------------------------------------------------------------')
+            print('\n')
+            print('The order is: CODE - [NAME, PRICE, DESCRIPTION, QUANTITY]')
+            print('---------------------------------------------------------')
+            if len(my_products) == 0:
+                print('You have nothing in your shopping cart')
+            for key, value in my_products.items():
+                print(str(key) + ' - ' + str(value))
+            print('\n\n\n\n')
         elif option == '3':
-            pp = pprint.PrettyPrinter(indent=8)
-            pp.pprint(products)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('---------------------------------------------------------------------------------------- PRODUCTS ----------------------------------------------------------------------------------------')
+            print('\n')
+            print('The order is: CODE - [NAME, PRICE, DESCRIPTION]')
+            print('-----------------------------------------------')
+            for key, value in products.items():
+                print(str(key) + ' - ' + str(value))
+            print('\n\n\n\n')
             try:
                 inp = int(input('Enter the code of the item that you want add in your cart: '))
                 quantity = int(input('Now, enter the quantity: '))
                 my_products[inp] = [products[inp], quantity]
             except KeyError:
                 print('Enter the valid option, please')
+            print('\n\n\n\n')
         elif option == '4':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('---------------------------------------------------------------------------------------- YOUR PRODUCTS ----------------------------------------------------------------------------------------')
+            print('\n')
+            print('The order is: CODE - [NAME, PRICE, DESCRIPTION, QUANTITY]')
+            print('---------------------------------------------------------')
+            if len(my_products) == 0:
+                print('You have nothing in your shopping cart')
+            for key, value in my_products.items():
+                print(str(key) + ' - ' + str(value))
+            print('\n\n\n\n')
             try:
                 inp = int(input('Enter the code of the item that you want remove from your cart: '))
                 del my_products[inp]            
             except KeyError:
                 print('Enter the valid option, please')
+            print('\n\n\n\n')
         elif option == '5':
+            os.system('cls' if os.name == 'nt' else 'clear')
             total_price = get_total_price(my_products)
             print('The total price of your purchase is: $ %d' % (total_price // 100) + '.' + '%d' % (total_price % 100))
+            print('\n\n\n\n')
         elif option == '6':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            total_price = get_total_price(my_products)
+            print('The total price of your purchase is: $ %d' % (total_price // 100) + '.' + '%d' % (total_price % 100))
+            print('\n\n\n\n')
             inp = float(input('Enter the amount you\'ll give to make the payment: ')) * 100.0
             total_price = get_total_price(my_products)
             if inp < total_price:
@@ -119,9 +160,18 @@ def main():
                 else:
                     print('The cashier\'s greed algorithm and the algorithm using dp for minimize the number of coins does work for this case')
                 print('-----------------------------------------------------------------------------------------------------------------------')
-        else:
+                print('Thanks for the preference, come back always')
+                total_price = 0.0
+                my_products = {}
+                print('\n\n\n\n')
+        elif option == '0':
+            os.system('cls' if os.name == 'nt' else 'clear')
             print('Thanks!')
             loop_condition = False
+        else:
+            os.system('cls' if os.name == 'nt' else 'clear')  
+            print('Enter a valid option!')
+            print('\n\n\n\n')
                 
 if __name__ == '__main__':
     main()
