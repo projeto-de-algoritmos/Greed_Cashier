@@ -105,6 +105,7 @@ def main():
                 inp = int(input('Enter the code of the item that you want add in your cart: '))
                 quantity = int(input('Now, enter the quantity: '))
                 my_products[inp] = [products[inp], quantity]
+                print('The product was add in your cart')
             except KeyError:
                 print('Enter the valid option, please')
             print('\n\n\n\n')
@@ -122,6 +123,7 @@ def main():
             try:
                 inp = int(input('Enter the code of the item that you want remove from your cart: '))
                 del my_products[inp]            
+                print('The product was removed')
             except KeyError:
                 print('Enter the valid option, please')
             print('\n\n\n\n')
